@@ -15,7 +15,7 @@ func determineListenAddress() (string, error) {
 	return ":" + port, nil
 }
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hola me llamo Alex")
+	fmt.Fprintln(w, "<html><head></head><body><b>Hola me llamo Alex</b></body></html>")
 }
 func main() {
 	addr, err := determineListenAddress()
