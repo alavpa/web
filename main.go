@@ -17,12 +17,20 @@ func determineListenAddress() (string, error) {
 func hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "<html><head></head><body><b>Hola me llamo Alex</b></body></html>")
 }
+
+func serveFiles(w http.ResponseWriter, r *http.Request) {
+	http.FileServer(http.Dir("public"))
+}
+
 func main() {
 	addr, err := determineListenAddress()
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	http.HandleFunc("/", hello)
+	http.HandleFunc("/public/", serveFiles)
+
 	log.Printf("Listening on %s...\n", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		panic(err)
