@@ -31,7 +31,7 @@ func main() {
 	http.HandleFunc("/", hello)
 
 	fs := http.FileServer(http.Dir("public"))
-	http.Handle("/public/", http.StripPrefix("/public/", fs))
+	http.Handle("/public/", fs))
 
 	log.Printf("Listening on %s...\n", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
