@@ -20,7 +20,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 func serveFiles(w http.ResponseWriter, r *http.Request) {
 	fs := http.FileServer(http.Dir("public"))
-	http.StripPrefix("/public/", fs)
+	return http.StripPrefix("/public/", fs)
 }
 
 func main() {
