@@ -20,7 +20,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 func serveFiles(w http.ResponseWriter, r *http.Request) {
 	fs := http.FileServer(http.Dir("public"))
-	return http.StripPrefix("/public/", fs)
+	http.StripPrefix("/public/", fs)
 }
 
 func main() {
@@ -30,7 +30,8 @@ func main() {
 	}
 
 	http.HandleFunc("/", hello)
-	http.HandleFunc("/public/", serveFiles)
+	fs := http.FileServer(http.Dir("public"))
+	http.HandleFunc("/public/", http.StripPrefix("/public/", fs))
 
 	log.Printf("Listening on %s...\n", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
