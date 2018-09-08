@@ -29,10 +29,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	http.HandleFunc("/", hello)
+	//http.HandleFunc("/", hello)
 
 	fs := http.FileServer(http.Dir("public"))
-	http.Handle("/public/", http.StripPrefix("/public/", fs))
+	http.Handle("/", http.StripPrefix("/public/", fs))
 
 	log.Printf("Listening on %s...\n", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
