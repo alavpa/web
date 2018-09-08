@@ -15,7 +15,7 @@ func determineListenAddress() (string, error) {
 	return ":" + port, nil
 }
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "<html><head></head><body><b>Hola me llamo Alex 2</b></body></html>")
+	fmt.Fprintln(w, "pong")
 }
 
 func serveFiles(w http.ResponseWriter, r *http.Request) {
@@ -29,7 +29,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	//http.HandleFunc("/", hello)
+	http.HandleFunc("/ping", hello)
 
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", http.StripPrefix("/", fs))
