@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func determineListenAddress() (string, error) {
@@ -23,7 +24,6 @@ func hello(w http.ResponseWriter, r *http.Request) {
 			time.Sleep(time.Second)
 			c <- "pong"
 		}
-
 	}()
 
 	for i := 0; i < 10; i++ {
