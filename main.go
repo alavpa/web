@@ -15,12 +15,21 @@ func determineListenAddress() (string, error) {
 	return ":" + port, nil
 }
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "pong")
-}
 
-func serveFiles(w http.ResponseWriter, r *http.Request) {
-	fs := http.FileServer(http.Dir("public"))
-	http.StripPrefix("/public/", fs)
+	c := make(chan string)
+
+	go func() {
+		for {
+			time.Sleep(time.Second)
+			c <- "pong"
+		}
+
+	}()
+
+	for i := 0; i < 10; i++ {
+		fmt.Fprintln(w, <-c)
+	}
+
 }
 
 func main() {
