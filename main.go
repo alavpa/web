@@ -22,13 +22,14 @@ func hello(w http.ResponseWriter, r *http.Request) {
 	go func() {
 		for {
 			time.Sleep(time.Second)
-			c <- "pong"
+			//c <- "pong"
+			fmt.Fprintln(w, "pong")
 		}
 	}()
 
-	for i := 0; i < 10; i++ {
-		fmt.Fprintln(w, <-c)
-	}
+	//	for i := 0; i < 10; i++ {
+	//		fmt.Fprintln(w, <-c)
+	//	}
 
 }
 
