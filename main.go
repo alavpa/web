@@ -8,11 +8,6 @@ import (
 	"time"
 )
 
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-}
-
 func determineListenAddress() (string, error) {
 	port := os.Getenv("PORT")
 	if port == "" {
