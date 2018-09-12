@@ -22,12 +22,21 @@ func determineListenAddress() (string, error) {
 	return ":" + port, nil
 }
 func hello(w http.ResponseWriter, r *http.Request) {
+
+	c := make(chan string)
+
 	go func() {
 		for {
 			time.Sleep(time.Second)
+			//c <- "pong"
 			fmt.Fprintln(w, "pong")
 		}
 	}()
+
+	//	for i := 0; i < 10; i++ {
+	//		fmt.Fprintln(w, <-c)
+	//	}
+
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
