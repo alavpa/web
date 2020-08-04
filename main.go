@@ -26,7 +26,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		fmt.Fprintln(w, <-c)
 	}
 
