@@ -39,6 +39,10 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func redirect(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "http://www.google.com", 301)
+}
+
 func main() {
 	addr, err := determineListenAddress()
 	if err != nil {
@@ -46,6 +50,7 @@ func main() {
 	}
 
 	http.HandleFunc("/ping", writeForm)
+	http.HandleFunc("/redirect", redirect)
 
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", http.StripPrefix("/", fs))
