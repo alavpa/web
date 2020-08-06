@@ -28,7 +28,7 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	phone := r.FormValue("fphone")
 	message := r.FormValue("fmessage")
 
-	http.Redirect(w, r, "http://www.google.com", 301)
+	http.Redirect(w, r, "http://www.marca.com", 301)
 
 }
 
