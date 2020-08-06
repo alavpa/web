@@ -64,27 +64,27 @@
     <section class="templateux-portfolio-overlap mb-5" data-aos="fade-up" id="next">
       <div class="container">
         <!-- <div class="row"> -->
-          <form action="/ping" method="GET">
+          <form action="/ping" method="post">
             <div class="row">
               <div class="col-md-4  mb-4">
-                <input type="text" class="form-control" placeholder="Name" id="fname" value="">
+                <input type="text" class="form-control" placeholder="Name" name="fname"/>
               </div>
               <div class="col-md-4  mb-4">
-                <input type="email" class="form-control" placeholder="Email" id="femail">
+                <input type="email" class="form-control" placeholder="Email" name="femail"/>
               </div>
               <div class="col-md-4  mb-4">
-                <input type="text" class="form-control" placeholder="Phone" id="fphone">
+                <input type="text" class="form-control" placeholder="Phone" name="fphone"/>
               </div>
             </div>
 			
             <div class="row">
               <div class="col-md-12  mb-4">
-                <textarea name="" class="form-control" cols="30" rows="10" placeholder="Write your message" id="fmessage"></textarea>
+                <textarea class="form-control" cols="30" rows="10" placeholder="Write your message" name="fmessage"></textarea>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4  mb-4">
-                <input type="submit" class="button button--red" value="Send your message">
+                <input type="submit" class="button button--red" value="Send your message"/>
               </div>
             </div>
           </form>
