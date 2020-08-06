@@ -32,7 +32,7 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 
 	writeMessage(name, email, phone, message)
 
-	http.Redirect(w, r, "http://www.marca.com", 301)
+	http.Redirect(w, r, "/contact.html", 301)
 
 }
 
