@@ -23,17 +23,10 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "Post from website! r.PostFrom = %v\n", r.PostForm)
-
 	name := r.FormValue("fname")
 	email := r.FormValue("femail")
 	phone := r.FormValue("fphone")
 	message := r.FormValue("fmessage")
-
-	fmt.Fprintf(w, "Name = %s\n", name)
-	fmt.Fprintf(w, "email = %s\n", email)
-	fmt.Fprintf(w, "phone = %s\n", phone)
-	fmt.Fprintf(w, "message = %s\n", message)
 
 	http.Redirect(w, r, "http://www.google.com", 301)
 
