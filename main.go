@@ -18,8 +18,8 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 
-	for key, value := range r.Form {
-		fmt.Fprintln(w, "%s => %s", key, value)
+	for key, value := range r.PostForm {
+		fmt.Fprintfln(w, key, " => ", value)
 	}
 
 	fmt.Fprintln(w, "TEST")
