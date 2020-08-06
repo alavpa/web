@@ -19,16 +19,22 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 
 	if err != nil {
-		fmt.Fprintln(w, err)
+		fmt.Fprintf(w, "ParseForm() err: %v", err)
+		return
 	}
 
-	for key, value := range r.PostForm {
-		fmt.Fprintf(w, key, " => ", value)
-		fmt.Fprintln(w, "")
-	}
+	fmt.Fprintf(w, "Post from website! r.PostFrom = %v\n", r.PostForm)
 
-	fmt.Fprintln(w, "")
-	fmt.Fprintln(w, "TEST")
+	name := r.FormValue("fname")
+	email := r.FormValue("femail")
+	phone := r.FormValue("fphone")
+	message := r.FormValue("fmessage")
+
+	fmt.Fprintf(w, "Name = %s\n", name)
+	fmt.Fprintf(w, "email = %s\n", email)
+	fmt.Fprintf(w, "phone = %s\n", phone)
+	fmt.Fprintf(w, "message = %s\n", message)
+
 }
 
 func main() {
