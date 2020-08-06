@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/smtp"
 	"os"
 	"time"
 )
@@ -30,9 +31,26 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	phone := r.FormValue("fphone")
 	message := r.FormValue("fmessage")
 
-	writeMessage(name, email, phone, message)
+	sendMessage(name, email, phone, message)
 
-	http.Redirect(w, r, "/contact.html", 301)
+	// http.Redirect(w, r, "/contact.html", 301)
+
+}
+
+func sendMessage(name string, email string, phone string, message string) {
+	auth := smtp.PlainAuth("", "alavpa@outlook.es", "@i1n5m2a1!", "smtp-mail.outlook.com")
+
+	// Here we do it all: connect to our server, set up a message and send it
+	to := []string{"alavpa@gmail.com"}
+	msg := []byte(name + "\r\n" +
+		email + "\r\n" +
+		phone + "\r\n" +
+		"\r\n" +
+		message + "\r\n")
+	err := smtp.SendMail("smtp-mail.outlook.com:587", auth, "alavpa@outlook.es", to, msg)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 }
 
