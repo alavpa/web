@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func determineListenAddress() (string, error) {
@@ -14,6 +15,7 @@ func determineListenAddress() (string, error) {
 	}
 	return ":" + port, nil
 }
+
 func writeForm(w http.ResponseWriter, r *http.Request) {
 
 	err := r.ParseForm()
@@ -28,8 +30,36 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	phone := r.FormValue("fphone")
 	message := r.FormValue("fmessage")
 
+	writeMessage(name, email, phone, message)
+
 	http.Redirect(w, r, "http://www.marca.com", 301)
 
+}
+
+func writeMessage(name string, email string, phone string, message string) {
+	t := time.Now()
+
+	filename = t.Format("20060102150405") + ".txt"
+	f, err = os.CreateFile("public/messages/" + filename)
+	defer f.Close()
+
+	writeWord(f, name+"\n")
+	writeWord(f, email+"\n")
+	writeWord(f, phone+"\n")
+	writeWord(f, message+"\n")
+	f.Sync()
+
+}
+
+func writeWord(f *File, word string) {
+	_, err := f.WriteString(word + "\n")
+	check(err)
+}
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
 }
 
 func redirect(w http.ResponseWriter, r *http.Request) {
