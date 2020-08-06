@@ -41,6 +41,7 @@ func writeMessage(name string, email string, phone string, message string) {
 	filename := t.Format("20060102150405") + ".txt"
 
 	f, err := os.Create("public/messages/" + filename)
+	check(err)
 	defer f.Close()
 
 	writeWord(f, name+"\n")
