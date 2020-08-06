@@ -19,7 +19,7 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 
 	if err != nil {
-		fmt.Fprintfln(w, err)
+		fmt.Fprintln(w, err)
 	}
 
 	fmt.Fprintln(w, "VALUES", r.PostForm)
