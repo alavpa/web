@@ -23,7 +23,7 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for key, value := range r.PostForm {
-		fmt.Fprintfln(w, key, " => ", value)
+		fmt.Fprintf(w, key, " => ", value, "\n")
 	}
 
 	fmt.Fprintln(w, "TEST")
