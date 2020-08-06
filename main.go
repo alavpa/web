@@ -51,7 +51,7 @@ func writeMessage(name string, email string, phone string, message string) {
 
 }
 
-func writeWord(f *File, word string) {
+func writeWord(f *os.File, word string) {
 	_, err := f.WriteString(word + "\n")
 	check(err)
 }
