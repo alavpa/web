@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"time"
 )
 
 func determineListenAddress() (string, error) {
@@ -15,19 +14,12 @@ func determineListenAddress() (string, error) {
 	}
 	return ":" + port, nil
 }
-func hello(w http.ResponseWriter, r *http.Request) {
+func writeForm(w http.ResponseWriter, r *http.Request) {
 
-	c := make(chan string)
+	r.ParseForm()
 
-	go func() {
-		for {
-			time.Sleep(time.Second)
-			c <- "pong"
-		}
-	}()
-
-	for i := 0; i < 10; i++ {
-		fmt.Fprintln(w, <-c)
+	for key, value := range r.Form {
+		fmt.Fprintln(w, "%s => %s", key, value)
 	}
 
 }
@@ -38,7 +30,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	http.HandleFunc("/ping", hello)
+	http.HandleFunc("/ping", writeForm)
 
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", http.StripPrefix("/", fs))
