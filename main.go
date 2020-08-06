@@ -16,7 +16,11 @@ func determineListenAddress() (string, error) {
 }
 func writeForm(w http.ResponseWriter, r *http.Request) {
 
-	r.ParseForm()
+	err := r.ParseForm()
+
+	if err != nil {
+		fmt.Fprintfln(w, err)
+	}
 
 	for key, value := range r.PostForm {
 		fmt.Fprintfln(w, key, " => ", value)
