@@ -38,7 +38,7 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 }
 
 func sendMessage(name string, email string, phone string, message string) {
-	auth := smtp.PlainAuth("", "alavpa@outlook.es", "secret-password", "smtp-mail.outlook.com")
+	auth := smtp.PlainAuth("", "alavpa@outlook.es", "@i1n5e2x1!", "smtp.office365.com")
 
 	// Here we do it all: connect to our server, set up a message and send it
 	to := []string{"alavpa@gmail.com"}
@@ -47,7 +47,7 @@ func sendMessage(name string, email string, phone string, message string) {
 		phone + "\r\n" +
 		"\r\n" +
 		message + "\r\n")
-	err := smtp.SendMail("smtp-mail.outlook.com:587", auth, "alavpa@outlook.es", to, msg)
+	err := smtp.SendMail("smtp.office365.com:587", auth, "alavpa@outlook.es", to, msg)
 	if err != nil {
 		log.Fatal(err)
 	}
