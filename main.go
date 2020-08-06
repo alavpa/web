@@ -22,6 +22,7 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "%s => %s", key, value)
 	}
 
+	fmt.Fprintln(w, "TEST")
 }
 
 func main() {
