@@ -16,26 +16,6 @@ func determineListenAddress() (string, error) {
 	return ":" + port, nil
 }
 
-func writeForm(w http.ResponseWriter, r *http.Request) {
-
-	err := r.ParseForm()
-
-	if err != nil {
-		fmt.Fprintf(w, "ParseForm() err: %v", err)
-		return
-	}
-
-	name := r.FormValue("fname")
-	email := r.FormValue("femail")
-	phone := r.FormValue("fphone")
-	message := r.FormValue("fmessage")
-
-	sendMessage(name, email, phone, message)
-
-	http.Redirect(w, r, "/contact.html", 301)
-
-}
-
 func sendMessage(name string, email string, phone string, message string) {
 
 	senderUser := os.Getenv("SENDER_USER")
@@ -65,8 +45,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	http.HandleFunc("/ping", writeForm)
-	http.HandleFunc("/redirect", redirect)
+	//http.HandleFunc("/ping", writeForm)
+	//http.HandleFunc("/redirect", redirect)
 
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", http.StripPrefix("/", fs))
