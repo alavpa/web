@@ -48,7 +48,7 @@ func sendMessage(name string, email string, phone string, message string) {
 
 	// Here we do it all: connect to our server, set up a message and send it
 	to := []string{email}
-	msg := []byte(message)
+	msg := []byte(body)
 	err := smtp.SendMail("smtp.gmail.com:587", auth, senderUser, to, msg)
 	if err != nil {
 		log.Fatal(err)
