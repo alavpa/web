@@ -32,7 +32,7 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 
 	sendMessage(name, email, phone, message)
 
-	// http.Redirect(w, r, "/contact.html", 301)
+	http.Redirect(w, r, "/contact.html", 301)
 
 }
 
@@ -41,9 +41,10 @@ func sendMessage(name string, email string, phone string, message string) {
 	senderUser := os.Getenv("SENDER_USER")
 	senderPass := os.Getenv("SENDER_PASS")
 
-	body := "To: " + email + "\r\n" +
+	body := "To: " + senderUser + "\r\n" +
+		"From: " + email + "\r\n" +
 		"Subject: Contact alavpa form\r\n" +
-		"\r\n NAME: " + name + "\nPHONE: " + phone + "\nMESSAGE: " + message + "\r\n"
+		"\r\nNAME: " + name + "\nPHONE: " + phone + "\nMESSAGE: " + message + "\r\n"
 	auth := smtp.PlainAuth("", senderUser, senderPass, "smtp.gmail.com")
 
 	// Here we do it all: connect to our server, set up a message and send it
