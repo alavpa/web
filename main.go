@@ -38,46 +38,21 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 }
 
 func sendMessage(name string, email string, phone string, message string) {
-	auth := smtp.PlainAuth("", "YWxhdnBhQG91dGxvb2suZXM=", "QGkxbjVtMmExIQ==", "smtp.office365.com")
+
+	senderUser := os.Getenv("SENDER_USER")
+	senderPass := os.Getenv("SENDER_PASS")
+
+	body := "To: " + email + "\r\n" +
+		"Subject: Contact alavpa form\r\n" +
+		"\r\n NAME: " + name + "\nPHONE: " + phone + "\nMESSAGE: " + message + "\r\n"
+	auth := smtp.PlainAuth("", senderUser, senderPass, "smtp.gmail.com")
 
 	// Here we do it all: connect to our server, set up a message and send it
-	to := []string{"alavpa@gmail.com"}
-	msg := []byte(name + "\r\n" +
-		email + "\r\n" +
-		phone + "\r\n" +
-		"\r\n" +
-		message + "\r\n")
-	err := smtp.SendMail("smtp.office365.com:587", auth, "alavpa@outlook.es", to, msg)
+	to := []string{email}
+	msg := []byte(message)
+	err := smtp.SendMail("smtp.gmail.com:587", auth, senderUser, to, msg)
 	if err != nil {
 		log.Fatal(err)
-	}
-
-}
-
-func writeMessage(name string, email string, phone string, message string) {
-	t := time.Now()
-	filename := t.Format("20060102150405") + ".txt"
-
-	f, err := os.Create("public/messages/" + filename)
-	check(err)
-	defer f.Close()
-
-	writeWord(f, name+"\n")
-	writeWord(f, email+"\n")
-	writeWord(f, phone+"\n")
-	writeWord(f, message+"\n")
-	f.Sync()
-
-}
-
-func writeWord(f *os.File, word string) {
-	_, err := f.WriteString(word + "\n")
-	check(err)
-}
-
-func check(e error) {
-	if e != nil {
-		panic(e)
 	}
 }
 
