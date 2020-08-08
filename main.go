@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"net/smtp"
 	"os"
-	"time"
 )
 
 func determineListenAddress() (string, error) {
