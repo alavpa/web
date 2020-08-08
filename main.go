@@ -41,14 +41,13 @@ func sendMessage(name string, email string, phone string, message string) {
 	senderUser := os.Getenv("SENDER_USER")
 	senderPass := os.Getenv("SENDER_PASS")
 
-	body := "To: " + senderUser + "\r\n" +
-		"From: " + email + "\r\n" +
+	body := "To: alavpa@gmail.com\r\n" +
 		"Subject: Contact alavpa form\r\n" +
-		"\r\nNAME: " + name + "\nPHONE: " + phone + "\nMESSAGE: " + message + "\r\n"
+		"\r\nNAME: " + name + "\nEmail: " + email + "\nPHONE: " + phone + "\nMESSAGE: " + message + "\r\n"
 	auth := smtp.PlainAuth("", senderUser, senderPass, "smtp.gmail.com")
 
 	// Here we do it all: connect to our server, set up a message and send it
-	to := []string{email}
+	to := []string{"alavpa@gmail.com"}
 	msg := []byte(body)
 	err := smtp.SendMail("smtp.gmail.com:587", auth, senderUser, to, msg)
 	if err != nil {
