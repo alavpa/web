@@ -43,7 +43,7 @@ func sendMessage(name string, email string, phone string, message string) {
 
 	body := "To: alavpa@gmail.com\r\n" +
 		"Subject: Contact alavpa form\r\n" +
-		"\r\nNAME: " + name + "\nEmail: " + email + "\nPHONE: " + phone + "\nMESSAGE: " + message + "\r\n"
+		"\r\nNAME: " + name + "\nEMAIL: " + email + "\nPHONE: " + phone + "\nMESSAGE: " + message + "\r\n"
 	auth := smtp.PlainAuth("", senderUser, senderPass, "smtp.gmail.com")
 
 	// Here we do it all: connect to our server, set up a message and send it
