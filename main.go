@@ -17,10 +17,10 @@ func determineListenAddress() (string, error) {
 
 func writeForm(w http.ResponseWriter, r *http.Request) {
 
-	err := r.ParseForm()
+	err1 := r.ParseForm()
 
-	if err != nil {
-		fmt.Fprintf(w, "ParseForm() err: %v", err)
+	if err1 != nil {
+		fmt.Fprintf(w, "ParseForm() err: %v", err1)
 		return
 	}
 
@@ -29,10 +29,10 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	phone := r.FormValue("fphone")
 	message := r.FormValue("fmessage")
 
-	err = sendMessage(name, email, phone, message)
+	err2 := sendMessage(name, email, phone, message)
 
-	if err != nil {
-		fmt.Fprintf(w, "Send Email err: %v", err)
+	if err2 != nil {
+		fmt.Fprintf(w, "Send Email err: %v", err2)
 		return
 	}
 
