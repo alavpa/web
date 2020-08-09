@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"net/smtp"
 	"os"
@@ -30,13 +29,18 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	phone := r.FormValue("fphone")
 	message := r.FormValue("fmessage")
 
-	sendMessage(name, email, phone, message)
+	err := sendMessage(name, email, phone, message)
+
+	if err != nil {
+		fmt.Fprintf(w, "Send Email err: %v", err)
+		return
+	}
 
 	http.Redirect(w, r, "/contact.html", 301)
 
 }
 
-func sendMessage(name string, email string, phone string, message string) {
+func sendMessage(name string, email string, phone string, message string) error {
 
 	senderUser := os.Getenv("SENDER_USER")
 	senderPass := os.Getenv("SENDER_PASS")
@@ -49,10 +53,7 @@ func sendMessage(name string, email string, phone string, message string) {
 	// Here we do it all: connect to our server, set up a message and send it
 	to := []string{"alavpa@gmail.com"}
 	msg := []byte(body)
-	err := smtp.SendMail("smtp.gmail.com:587", auth, senderUser, to, msg)
-	if err != nil {
-		log.Fatal(err)
-	}
+	return smtp.SendMail("smtp.gmail.com:587", auth, senderUser, to, msg)
 }
 
 func redirect(w http.ResponseWriter, r *http.Request) {
