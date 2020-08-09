@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">ç
+	<script src="https://www.google.com/recaptcha/api.js"></script>
     <title>alavpa &mdash; Senior Android Developer</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/aos.min.css">
@@ -12,7 +13,6 @@
 	<link rel="stylesheet" href="fonts2/icomoon/style.css">
     <link rel="stylesheet" href="css/animsition.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
@@ -83,8 +83,19 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-md-12  mb-4">
+				  <button class="g-recaptcha" 
+				          data-sitekey="6Le_m7wZAAAAAJt6jjmTBSrw2-WK9FY-Ec-rtguL" 
+				          data-callback='onSubmit' 
+				          data-action='submit'>Submit</button>
+
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-4  mb-4">
-                <input type="submit" class="button button--red" value="Send your message"/>
+                  <input type="submit" class="button button--red" value="Send your message" data-sitekey="6Le_m7wZAAAAAJt6jjmTBSrw2-WK9FY-Ec-rtguL" 
+				          data-callback='onSubmit' 
+				          data-action='submit'/>
               </div>
             </div>
           </form>
@@ -116,5 +127,10 @@
   
   <script src="js/scripts-all.js"></script>
   <script src="js/main.js"></script>
+  <script>
+     function onSubmit(token) {
+       document.getElementById("demo-form").submit();
+     }
+   </script>
 </body>
 </html>
