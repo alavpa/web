@@ -29,7 +29,7 @@ func writeForm(w http.ResponseWriter, r *http.Request) {
 	phone := r.FormValue("fphone")
 	message := r.FormValue("fmessage")
 
-	err := sendMessage(name, email, phone, message)
+	err = sendMessage(name, email, phone, message)
 
 	if err != nil {
 		fmt.Fprintf(w, "Send Email err: %v", err)
